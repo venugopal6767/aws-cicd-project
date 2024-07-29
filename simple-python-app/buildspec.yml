@@ -22,8 +22,6 @@ phases:
       - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-10)
       - IMAGE_TAG="$COMMIT_ID"
       - docker build -t "simple-python-app:$IMAGE_TAG" .
-      # - docker tag simple-python-app:$IMAGE_TAG venuzs/simple-python-app:$IMAGE_TAG
-      # - docker push "venuzs/simple-python-app:$IMAGE_TAG"
   
   post_build:
     commands:
@@ -37,6 +35,6 @@ phases:
 artifacts:
   files:
     - appspec.yml
-    - simple-python-app/*
+    - scripts/*
     - imagedefinitions.json
 
