@@ -21,7 +21,6 @@ phases:
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
       - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-10)
       - IMAGE_TAG="$COMMIT_ID"
-      - echo $IMAGE_TAG
       - docker build -t "simple-python-app:$IMAGE_TAG" .
       - docker tag simple-python-app:$IMAGE_TAG venuzs/simple-python-app:$IMAGE_TAG
       - docker push "venuzs/simple-python-app:$IMAGE_TAG"
