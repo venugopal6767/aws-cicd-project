@@ -12,6 +12,8 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - pip install -r simple-python-app/requirements.txt
+      - export COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-10)
+      - export IMAGE_TAG="$COMMIT_ID"
 
   build:
     commands:
@@ -19,7 +21,6 @@ phases:
       - cd simple-python-app/
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
-      - IMAGE_TAG="${CODEBUILD_BUILD_ID}"
       - docker build -t "simple-python-flask-app:$IMAGE_TAG" .
       - docker push "venuzs/simple-python-flask-app:$IMAGE_TAG"
   
