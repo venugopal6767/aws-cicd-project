@@ -18,8 +18,8 @@ phases:
       - cd simple-python-app/
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
-      - docker build -t "simple-python-flask-app:v2" .
-      - docker push "simple-python-flask-app:v2"
+      - docker build -t simple-python-flask-app:latest .
+      - docker push simple-python-flask-app:latest
   post_build:
     commands:
       - echo "Build completed successfully!"
