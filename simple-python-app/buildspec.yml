@@ -21,7 +21,7 @@ phases:
       - IMAGE_TAG="${CODEBUILD_BUILD_ID}"
       - docker build -t "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG" .
       - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG"
-      - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest"
+      - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG"
   post_build:
     commands:
       - echo "Build completed successfully!"
