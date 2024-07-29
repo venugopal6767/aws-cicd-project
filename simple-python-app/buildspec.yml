@@ -20,9 +20,8 @@ phases:
       - echo "Building Docker image..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
       - IMAGE_TAG="${CODEBUILD_BUILD_ID}"
-      - echo IMAGE_TAG
-      - docker build -t simple-python-flask-app:$IMAGE_TAG" .
-      - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG"
+      - docker build -t "simple-python-flask-app:$IMAGE_TAG" .
+      - docker push "venuzs/simple-python-flask-app:$IMAGE_TAG"
   
   post_build:
     commands:
