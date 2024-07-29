@@ -12,13 +12,15 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - pip install -r simple-python-app/requirements.txt
+
   build:
     commands:
       - echo "Running tests..."
       - cd simple-python-app/
       - echo "Building Docker image..."
-      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
-      - docker build -t "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest" .
+      - IMAGE_TAG="${CODEBUILD_BUILD_ID}"
+      - docker build -t "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG" .
+      - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:$IMAGE_TAG"
       - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest"
   post_build:
     commands:
