@@ -23,7 +23,7 @@ phases:
       - IMAGE_TAG="$COMMIT_ID"
       - echo $IMAGE_TAG
       - docker build -t "simple-python-app:$IMAGE_TAG" .
-      - docker push "venuzs/simple-python-app:$IMAGE_TAG"
+      - docker push venuzs/simple-python-app:$IMAGE_TAG
   
   post_build:
     commands:
