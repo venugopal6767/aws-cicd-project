@@ -37,6 +37,6 @@ phases:
 artifacts:
   files:
     - appspec.yml
-    - scripts/*
+    - simple-python-app/*
     - imagedefinitions.json
 

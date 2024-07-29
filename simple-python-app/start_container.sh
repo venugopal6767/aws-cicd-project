@@ -5,7 +5,7 @@ echo "Starting the Docker container..."
 
 # Define your container name and image URI
 CONTAINER_NAME="awscicd"
-IMAGE_URI=$(jq -r '.[0].imageUri' /home/ec2-user/deployment/imagedefinitions.json)
+IMAGE_URI=$(jq -r '.[0].imageUri' imagedefinitions.json)
 
 # Pull the latest image
 docker pull $IMAGE_URI
