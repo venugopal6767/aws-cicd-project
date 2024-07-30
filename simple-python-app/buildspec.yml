@@ -19,10 +19,9 @@ phases:
 
   build:
     commands:
-      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-10)
-      - IMAGE_TAG="${CODEBUILD_BUILD_ID}-${COMMIT_ID}"
-      - echo "Building Docker image..."
-      - docker build -t "$REPOSITORY_NAME:$IMAGE_TAG" .
+      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-9)
+      - IMAGE_TAG="$COMMIT_ID"
+      - docker build -t "$REPOSITORY_NAME:$IMAGE_TAG" 
 
   post_build:
     commands:
