@@ -1,0 +1,6 @@
+[
+    {
+      "name": "web-app",
+      "imageUri": "your-dockerhub-username/web-app-repo:latest"
+    }
+  ]
