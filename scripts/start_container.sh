@@ -4,14 +4,13 @@
 echo "Starting the Docker container..."
 
 # Define your container name and image URI
-CONTAINER_NAME="awscicd"
 # IMAGE_URI=$(jq -r '.[0].imageUri' imagedefinitions.json)
 
 # Pull the latest image
 # docker pull $IMAGE_URI
-docker pull venuzs/simple-python-app:0a9d47cef3
+docker pull nginx
 
 # Run the new container
-docker run -d --name $CONTAINER_NAME -p 5000:5000 venuzs/simple-python-app:0a9d47cef3
+docker run -d --name nginx -p 80:80 nginx:latest
 
 echo "Container $CONTAINER_NAME started with image"
