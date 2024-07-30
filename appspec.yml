@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   files:
-  - source: /  # This should be the source directory containing your Docker images
+  - source: imagedefinitions.json
     destination: /tmp 
 hooks:
   ApplicationStop:
