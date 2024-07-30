@@ -1,0 +1,7 @@
+[
+    {
+      "name": "container-name",
+      "imageUri": "docker-repository/image:tag"
+    }
+  ]
+  
