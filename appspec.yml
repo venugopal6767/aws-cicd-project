@@ -1,6 +1,8 @@
 version: 0.0
 os: linux
-
+files:
+  - source: image-definition.json
+    destination: /tmp/image-definition.json
 hooks:
   ApplicationStop:
     - location: scripts/stop_container.sh
