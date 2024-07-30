@@ -26,10 +26,9 @@ phases:
   post_build:
     commands:
       - echo "Tagging Docker image..."
-      - docker tag "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG" "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:latest"
+      - docker tag "$REPOSITORY_NAME:$IMAGE_TAG" "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG"
       - echo "Pushing Docker images..."
       - docker push "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG"
-      - docker push "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:latest"
       - echo "Generating imagedefinitions.json..."
       - printf '[{"name":"%s","imageUri":"%s/%s:%s"}]' "$CONTAINER_NAME" "docker.io" "$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME" "$IMAGE_TAG" > imagedefinitions.json
 
