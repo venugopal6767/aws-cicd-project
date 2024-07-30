@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   files:
-  - source: imagedefinitions.json
+  - source: 
     destination: /tmp 
 hooks:
   ApplicationStop:
