@@ -9,6 +9,9 @@ phases:
   install:
     runtime-versions:
       python: 3.11
+    commands:
+      - echo "Checking Docker version..."
+      - docker --version || echo "Docker is not installed or not found."
 
   pre_build:
     commands:
@@ -28,7 +31,7 @@ phases:
   post_build:
     commands:
       - echo "Tagging Docker image..."
-      - docker tag "simple-python-app:$IMAGE_TAG" "$DOCKER_REGISTRY_USERNAME/simple-python-app:$IMAGE_TAG"
+      - docker tag simple-python-app:$IMAGE_TAG "$DOCKER_REGISTRY_USERNAME/simple-python-app:$IMAGE_TAG"
       - echo "Pushing Docker images..."
       - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-app:$IMAGE_TAG"
       - echo "Generating imagedefinitions.json..."
