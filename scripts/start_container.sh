@@ -2,6 +2,7 @@
   
 # Variables
 REPOSITORY_NAME="venuzs/venu"
+CONTAINER_NAME="pythonapp"
 
 # Get the latest image tag from Docker Hub
 LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/$REPOSITORY_NAME/tags/?page_size=100" \
@@ -12,4 +13,4 @@ echo "$REPOSITORY_NAME:$LATEST_TAG"
 
 docker pull "$REPOSITORY_NAME:$LATEST_TAG"
 
-docker run -d -p 5500:5500 "$REPOSITORY_NAME:$LATEST_TAG"
+docker run -d --name "$CONTAINER_NAME" -p 5500:5500 "$REPOSITORY_NAME:$LATEST_TAG"
