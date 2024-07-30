@@ -14,14 +14,18 @@ phases:
 
   pre_build:
     commands:
-      - echo "Logging in to Docker Hub..."
-      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
+      - echo "Installing dependencies..."
+      - pip install -r $REPOSITORY_NAME/requirements.txt
 
   build:
     commands:
-      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-9)
+      - echo "Running tests..."
+      - cd  $REPOSITORY_NAME/
+      - echo "Building Docker image..."
+      - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin
+      - COMMIT_ID=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-10)
       - IMAGE_TAG="$COMMIT_ID"
-      - docker build -t "$REPOSITORY_NAME:$IMAGE_TAG" 
+      - docker build -t "$REPOSITORY_NAME:$IMAGE_TAG"
 
   post_build:
     commands:
