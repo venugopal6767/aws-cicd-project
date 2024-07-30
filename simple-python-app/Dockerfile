@@ -1,20 +1,19 @@
-# Base image
-FROM python:3.8
+# Use the official Python image.
+# https://hub.docker.com/_/python
+FROM python:3.8-slim
 
-# Set the working directory inside the container
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the requirements file
-COPY requirements.txt .
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install the project dependencies
-RUN pip install -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code into the container
-COPY . .
+# Make port 5500 available to the world outside this container
+EXPOSE 5500
 
-# Expose the port the Flask application will be listening on
-EXPOSE 5000
-
-# Run the Flask application
+# Run app.py when the container launches
 CMD ["python", "app.py"]
+
