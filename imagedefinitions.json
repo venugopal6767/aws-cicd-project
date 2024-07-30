@@ -1,7 +1,0 @@
-[
-    {
-      "name": "web-app",
-      "imageUri": "docker.io/$DOCKER_REGISTRY_USERNAME/simple-python-app:$IMAGE_TAG"
-    }
-  ]
-  

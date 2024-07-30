@@ -1,22 +1,20 @@
 #!/bin/bash
+  
+# Variables
+REPOSITORY_NAME="venuzs/venu"
 
-# Define container name and image URI
-CONTAINER_NAME="web-app"
-IMAGE_DEFINITION_FILE="/tmp/imagedefinitions.json"
+# Get the latest image tag from Docker Hub
+LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/$REPOSITORY_NAME/tags/?page_size=100" \
+  | jq -r '.results[0].name')
 
-# Read image URI from imagedefinitions.json
-IMAGE_URI=$(jq -r '.[] | select(.name == "'"$CONTAINER_NAME"'") | .imageUri' $IMAGE_DEFINITION_FILE)
-
-# Check if the image URI is present
-if [ -z "$IMAGE_URI" ]; then
-    echo "Image URI not found in $IMAGE_DEFINITION_FILE"
-    exit 1
+# Check if LATEST_TAG is empty
+if [ -z "$LATEST_TAG" ]; then
+  echo "Error: Could not retrieve the latest tag."
+  exit 1
 fi
+# Output the latest tag
+echo "$REPOSITORY_NAME:$LATEST_TAG"
 
-# Pull the new Docker image
-echo "Pulling new image $IMAGE_URI..."
-docker pull $IMAGE_URI
+docker pull "$REPOSITORY_NAME:$LATEST_TAG"
 
-# Run the Docker container with the new image
-echo "Starting container $CONTAINER_NAME with image $IMAGE_URI..."
-docker run -d --name $CONTAINER_NAME $IMAGE_URI
+docekr run -d -p 5500:5500 "$REPOSITORY_NAME:$LATEST_TAG"
