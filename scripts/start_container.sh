@@ -14,4 +14,4 @@ docker pull venuzs/simple-python-app:0a9d47cef3
 # Run the new container
 docker run -d --name $CONTAINER_NAME -p 5000:5000 venuzs/simple-python-app:0a9d47cef3
 
-echo "Container $CONTAINER_NAME started with image $IMAGE_URI."
+echo "Container $CONTAINER_NAME started with image"
