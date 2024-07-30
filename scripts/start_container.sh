@@ -7,11 +7,6 @@ REPOSITORY_NAME="venuzs/venu"
 LATEST_TAG=$(curl -s "https://hub.docker.com/v2/repositories/$REPOSITORY_NAME/tags/?page_size=100" \
   | jq -r '.results[0].name')
 
-# Check if LATEST_TAG is empty
-if [ -z "$LATEST_TAG" ]; then
-  echo "Error: Could not retrieve the latest tag."
-  exit 1
-fi
 # Output the latest tag
 echo "$REPOSITORY_NAME:$LATEST_TAG"
 
