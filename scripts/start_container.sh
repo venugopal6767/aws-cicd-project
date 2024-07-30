@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# Start the Docker container
-echo "Starting the Docker container..."
+# Define container name and image URI
+CONTAINER_NAME="web-app"
+IMAGE_DEFINITION_FILE="/tmp/imagedefinitions.json"
 
-# Define the container name and get the image URI from imagedefinitions.json
-CONTAINER_NAME="my-pythonapp"  # Set this to your container name
-IMAGE_URI=$(jq -r '.[0].imageUri' imagedefinitions.json)
+# Read image URI from imagedefinitions.json
+IMAGE_URI=$(jq -r '.[] | select(.name == "'"$CONTAINER_NAME"'") | .imageUri' $IMAGE_DEFINITION_FILE)
 
-# Pull the latest image
-echo "Pulling image $IMAGE_URI..."
+# Check if the image URI is present
+if [ -z "$IMAGE_URI" ]; then
+    echo "Image URI not found in $IMAGE_DEFINITION_FILE"
+    exit 1
+fi
+
+# Pull the new Docker image
+echo "Pulling new image $IMAGE_URI..."
 docker pull $IMAGE_URI
 
-# Run the new container
-echo "Running container $CONTAINER_NAME with image $IMAGE_URI..."
-docker run -d --name $CONTAINER_NAME -p 5500:5500 $IMAGE_URI
-
-echo "Container $CONTAINER_NAME started with image $IMAGE_URI"
-
+# Run the Docker container with the new image
+echo "Starting container $CONTAINER_NAME with image $IMAGE_URI..."
+docker run -d --name $CONTAINER_NAME $IMAGE_URI

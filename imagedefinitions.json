@@ -1,6 +1,7 @@
 [
     {
       "name": "web-app",
-      "imageUri": "your-dockerhub-username/web-app-repo:latest"
+      "imageUri": "docker.io/$DOCKER_REGISTRY_USERNAME/$REPOSITORY_NAME:$IMAGE_TAG"
     }
   ]
+  
